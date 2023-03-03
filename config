@@ -1,0 +1,9 @@
+const config = {
+    db: {
+      host: "localhost",
+      user: "root",
+      password: "test_password",
+      database: "ToDoDB"
+    }
+  };
+  module.exports = config;
