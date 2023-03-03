@@ -20,18 +20,11 @@ async function getMultiple() {
 // Create a new field
 // Amalgamate true/false with 1/0
 async function create(task){
-    ans = 257;
-    if (task.finished == "true" || task.finished == 1) {
-        ans = 1;
-    } 
-    if (task.finished == "false" || task.finished == 0) {
-        ans = 0;
-    }
   const result = await db.query(
     `INSERT INTO ToDoList
     (task_name, task_finished) 
     VALUES
-    ("${task.name}", "${ans}")`
+    ("${task.name}", ${task.finished})`
   );
 
   let message = 'Error in creating task';
@@ -43,7 +36,24 @@ async function create(task){
   return {message};
 }
 
+async function update(id, task){
+  const result = await db.query(
+    `UPDATE ToDoList 
+    SET task_finished=${task.finished}
+    WHERE task_id=${id}` 
+  );
+ 
+  let message = 'Error in updating task';
+ 
+  if (result.affectedRows) {
+    message = 'Task updated successfully';
+  }
+ 
+  return {message};
+}
+
 module.exports = {
   getMultiple,
-  create
+  create,
+  update
 }

@@ -23,4 +23,14 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-module.exports = router;
+// PUT request to update a task by id
+router.put('/:id', async function(req, res, next) {
+  try {
+    res.json(await ToDos.update(req.params.id, req.body));
+  } catch (err) {
+    console.error(`Error while updating task`, err.message);
+    next(err);
+  }
+});
+
+  module.exports = router;
