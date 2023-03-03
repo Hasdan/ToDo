@@ -5,6 +5,6 @@ apt install nodejs mysql-server
 # Install dependency mysql for communication
 npm install mysql2 express
 # Create the database and the table if they do not exist
-mysql < database_creation_file.txt
+mysql -u root --password="test_password" < database_creation_file.txt
 # Launch the server
 node index.js
