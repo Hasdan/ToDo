@@ -18,7 +18,6 @@ async function getMultiple() {
 }
 
 // Create a new field
-// Amalgamate true/false with 1/0
 async function create(task){
   const result = await db.query(
     `INSERT INTO ToDoList
@@ -52,8 +51,24 @@ async function update(id, task){
   return {message};
 }
 
+// DELETE ... rather self-explanatory, delete a task
+async function remove(id){
+  const result = await db.query(
+    `DELETE FROM ToDoList WHERE task_id=${id}`
+  );
+
+  let message = 'Error in deleting task';
+
+  if (result.affectedRows) {
+    message = 'Task deleted successfully';
+  }
+
+  return {message};
+}
+
 module.exports = {
   getMultiple,
   create,
-  update
+  update,
+  remove
 }

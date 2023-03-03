@@ -14,7 +14,7 @@ app.use(
 
 // Main Route to confirm site is available
 app.get("/", (req, res) => {
-  res.json({ message: "ok" });
+  res.json({ message: "Welcome!" });
 });
 
 // Get all ToDos
